@@ -1,8 +1,8 @@
 class Obstacle {
   // Member Variable
   float x, y, w, h, speed, health;
-  PImage iTankW;
-    char idir;
+  PImage ob;
+  char idir;
 
   // Constructor
   Obstacle(float x, float y, float w, float h, float speed, float health) {
@@ -13,16 +13,16 @@ class Obstacle {
     this.speed = speed;
     this. health = health;
     idir = 'w';
+      ob = loadImage("Obstacle.png");
   }
 
   void display() {
- fill(128);
- rectMode(CENTER);
- rect(x,y,w,h);
+    fill(128);
+   image(ob,x,y);
   }
 
   void move() {
-  x=x+speed;
+    x=x+speed;
   }
 
   void fire() {

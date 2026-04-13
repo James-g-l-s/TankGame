@@ -1,13 +1,19 @@
 // April 1 2026 | TankGame by James Stacey
 Tank t1;
 Obstacle o1;
-PImage bg;
+Obstacle o2;
+Obstacle o3; 
+PImage bg; 
+PImage ob;
+ 
 
 void setup() {
   size(500, 500);
   bg = loadImage("bg1.png");
   t1 = new Tank();
   o1 = new Obstacle(400,100,100,50,5,100);
+  o2 = new Obstacle(300,100,100,50,5,100);
+  o3 = new Obstacle(200,100,100,50,5,100);
 }
 
 void draw() {
@@ -16,6 +22,12 @@ void draw() {
   image(bg,0,0);
   t1.display();
   o1.display();
+  o2.display();
+  o3.display();
+  o1.move(); 
+  o2.move();
+  o3.move();
+  
   
 }
 
