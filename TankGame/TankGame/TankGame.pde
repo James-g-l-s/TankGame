@@ -1,12 +1,14 @@
 // April 1 2026 | TankGame by James Stacey
 Tank t1;
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 Obstacle o1;
 Obstacle o2;
 Obstacle o3;
 PImage bg;
 PImage ob;
 int score;
+Timer objTimer;
 
 
 void setup() {
@@ -14,27 +16,49 @@ void setup() {
   score = 0;
   bg = loadImage("bg1.png");
   t1 = new Tank();
-  o1 = new Obstacle(400, 100, 100, 50, 5, 100);
-  o2 = new Obstacle(300, 100, 100, 50, 5, 100);
-  o3 = new Obstacle(200, 100, 100, 50, 5, 100);
+  objTimer = new Timer(1000);
+  objTimer.start();
+  //o1 = new Obstacle(400, 100, 100, 50, 5, 100);
+//  o2 = new Obstacle(300, 100, 100, 50, 5, 100);
+ // o3 = new Obstacle(200, 100, 100, 50, 5, 100);
 }
 
 void draw() {
   background(127);
   imageMode(CORNER);
   image(bg, 0, 0);
+  
+  //Distribute object on Timer
+  if(objTimer.isFinished()) {
+    //add object
+      obstacles.add(new Obstacle(-100,200,100,100, int(random(1,10)),10));
+      objTimer.start();
+  }
+  //Render and detect collision
+  for (int i = 0; i < obstacles.size(); i++) {
+    Obstacle o = obstacles.get(i);
+    o.display();
+    o.move();
+   // if(o.reachedEdge()){
+     // obstacles.remove(i);
+ //   }
+  }
+  
   for (int i = 0; i < projectiles.size(); i++) {
     Projectile p = projectiles.get(i);
+    for(int j = 0; j < obstacles.size(); j++) {
+      Obstacle o = obstacles.get (j);
+      if(p.intersect(o)) {
+      score = score + 100;
+      projectiles.remove(i);
+      obstacles.remove(j);
+      }
+    }
     p.display();
     p.move();
   }
   t1.display();
-  o1.display();
-  o2.display();
-  o3.display();
-  o1.move();
-  o2.move();
-  o3.move();
+
   scorePanel();
 }
 
