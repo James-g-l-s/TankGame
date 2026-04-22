@@ -30,23 +30,22 @@ class Tank {
     } else if (idir == 'd') {
       image(iTankD, x, y);
     }
-    
   }
 
-    void move(char dir) {
-      idir = dir;
-      if (dir == 'w') {
-        idir = 'w';
-        y = y - speed;
-      } else if (dir == 's') {
-        y = y + speed;
-      } else if (dir == 'a') {
-        x = x - speed;
-      } else if (dir == 'd') {
-        x = x + speed;
-      }
+  void move(char dir) {
+    idir = dir;
+    if (dir == 'w') {
+      idir = 'w';
+      y = y - speed;
+    } else if (dir == 's') {
+      y = y + speed;
+    } else if (dir == 'a') {
+      x = x - speed;
+    } else if (dir == 'd') {
+      x = x + speed;
     }
+  }
 
-      void fire() {
-      }
-    }
+  void fire() {
+  }
+}
